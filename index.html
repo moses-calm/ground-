@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#7BA891">
+<title>Ground – Calm Anxiety Fast</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{
+  --bg:#EAF2ED; --bg2:#DCE9E4; --card:#FFFFFF; --primary:#7BA891;
+  --primary-d:#5E8C74; --accent:#B7A9D9; --text:#2E3A34; --muted:#6E7C74;
+  --danger:#C97A6D; --shadow:0 4px 20px rgba(94,140,116,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:linear-gradient(160deg,var(--bg),var(--bg2));
+  color:var(--text);overflow-x:hidden;padding-bottom:76px;
+  transition:background .6s ease;
+}
+body[dir="ltr"]{direction:ltr}
+.screen{display:none;padding:20px 18px;min-height:calc(100vh - 76px);animation:fade .5s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:22px;font-weight:700;margin-bottom:4px}
+h2{font-size:18px;font-weight:600;margin:18px 0 10px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+.card{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.btn{
+  background:var(--primary);color:#fff;border:none;border-radius:16px;
+  padding:14px 20px;font-size:16px;font-weight:600;width:100%;cursor:pointer;
+  transition:transform .15s,background .2s;font-family:inherit;
+}
+.btn:active{transform:scale(.97)}
+.btn.sec{background:transparent;color:var(--primary-d);border:1.5px solid var(--primary)}
+.btn.ghost{background:var(--bg2);color:var(--text)}
+.btn.danger{background:var(--danger)}
+.row{display:flex;gap:10px}
+.row .btn{width:auto;flex:1}
+
+/* Header */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.lang-sel{background:var(--card);border:1px solid #d5e2db;border-radius:12px;padding:8px 12px;font-size:14px;font-family:inherit;color:var(--text)}
+
+/* Home / Ground button */
+.ground-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 0 10px}
+.ground-btn{
+  width:200px;height:200px;border-radius:50%;border:none;cursor:pointer;
+  background:radial-gradient(circle at 40% 35%,#9CC3AE,var(--primary));
+  color:#fff;font-size:26px;font-weight:700;box-shadow:0 10px 40px rgba(94,140,116,.35);
+  animation:breathe 5s ease-in-out infinite;font-family:inherit;
+}
+.ground-btn:active{transform:scale(.96)}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.ground-hint{color:var(--muted);margin-top:22px;font-size:15px;text-align:center}
+
+/* Slider */
+.slider-wrap{padding:10px 0}
+input[type=range]{width:100%;height:8px;border-radius:8px;background:#d5e2db;-webkit-appearance:none;appearance:none;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--primary);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border:none;border-radius:50%;background:var(--primary);cursor:pointer}
+.slider-val{text-align:center;font-size:40px;font-weight:700;color:var(--primary-d);margin:6px 0}
+
+/* Mood emojis */
+.mood{display:flex;justify-content:space-between;gap:6px;margin:8px 0}
+.mood button{flex:1;background:var(--bg2);border:none;border-radius:14px;padding:12px 0;font-size:26px;cursor:pointer;transition:transform .15s,background .2s}
+.mood button.sel{background:var(--primary);transform:scale(1.08)}
+
+/* Breathing circle */
+.breath-stage{display:flex;flex-direction:column;align-items:center;padding:20px 0}
+.breath-circle{
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,#A9CFBB,var(--primary));
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  font-size:20px;font-weight:600;transition:transform 4s ease-in-out;
+}
+.breath-circle.in{transform:scale(1.4)}
+.breath-circle.out{transform:scale(0.85)}
+.breath-txt{margin-top:24px;font-size:20px;font-weight:600;min-height:26px}
+.count{color:var(--muted);margin-top:8px}
+
+/* Grounding checklist */
+.check-item{display:flex;align-items:center;gap:12px;background:var(--bg2);border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer;transition:background .2s}
+.check-item.done{background:#cfe3d8;text-decoration:line-through;color:var(--muted)}
+.check-item .num{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+
+/* imagery text */
+.imagery{font-size:18px;line-height:1.9;color:var(--text);padding:6px 4px}
+
+/* feedback */
+.fb-row{display:flex;gap:10px;margin-top:16px}
+
+/* history / rec */
+.stat{font-size:34px;font-weight:700;color:var(--primary-d)}
+.rec-item{background:var(--card);border-radius:16px;padding:14px;box-shadow:var(--shadow);margin-bottom:12px}
+.rec-item .why{color:var(--muted);font-size:13px;margin-top:4px}
+
+/* settings */
+.set-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #e0eae5}
+.set-row:last-child{border:none}
+.toggle{position:relative;width:50px;height:28px}
+.toggle input{opacity:0;width:0;height:0}
+.toggle span{position:absolute;inset:0;background:#c9d6cf;border-radius:28px;transition:.3s;cursor:pointer}
+.toggle span:before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
+.toggle input:checked+span{background:var(--primary)}
+.toggle input:checked+span:before{transform:translateX(22px)}
+body[dir="rtl"] .toggle input:checked+span:before{transform:translateX(-22px)}
+
+/* safety banner */
+.safety{background:#F7ECE9;border:1px solid #E8CFC8;border-radius:16px;padding:14px;margin-top:16px}
+.safety p{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+
+/* bottom nav */
+.nav{position:fixed;bottom:0;left:0;right:0;height:64px;background:var(--card);
+  box-shadow:0 -2px 16px rgba(0,0,0,.06);display:flex;justify-content:space-around;align-items:center;z-index:50}
+.nav button{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:inherit;flex:1;padding:6px 0}
+.nav button.active{color:var(--primary-d)}
+.nav .ic{font-size:20px}
+
+/* install prompt */
+.install{position:fixed;bottom:76px;left:12px;right:12px;background:var(--primary-d);color:#fff;border-radius:16px;padding:14px;display:none;align-items:center;justify-content:space-between;gap:10px;z-index:60;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.install.show{display:flex}
+.install button{background:#fff;color:var(--primary-d);border:none;border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer;font-family:inherit}
+.install .x{background:none;color:#fff;font-size:20px;padding:0 6px}
+
+/* select */
+select.age{width:100%;padding:14px;border-radius:14px;border:1px solid #d5e2db;font-size:16px;font-family:inherit;background:var(--card);color:var(--text)}
+input.time{width:100%;padding:14px;border-radius:14px;border:1px solid #d5e2db;font-size:16px;font-family:inherit;background:var(--card);color:var(--text)}
+</style>
+</head>
+<body dir="rtl">
+
+<!-- HOME -->
+<div class="screen active" id="s-home">
+  <div class="top">
+    <h1 data-t="appName">Ground</h1>
+    <select class="lang-sel" id="langSel" onchange="setLang(this.value)"></select>
+  </div>
+  <div class="sub" data-t="tagline">Calm Anxiety Fast</div>
+
+  <div class="ground-wrap">
+    <button class="ground-btn" id="groundBtn" onclick="openLevel()">Ground</button>
+    <div class="ground-hint" data-t="homeHint">לחצו על הכפתור כשמרגישים לחץ או חרדה</div>
+  </div>
+
+  <div class="safety" id="safetyHome">
+    <p data-t="safetyText"></p>
+    <button class="btn danger" onclick="callHelp()" data-t="callHelp">התקשרו לעזרה</button>
+  </div>
+</div>
+
+<!-- LEVEL -->
+<div class="screen" id="s-level">
+  <h1 data-t="levelQ">כמה חזק זה עכשיו?</h1>
+  <div class="sub" data-t="levelSub">1 = רגוע, 10 = פאניקה</div>
+  <div class="card">
+    <div class="slider-val" id="levelVal">5</div>
+    <div class="slider-wrap">
+      <input type="range" min="1" max="10" value="5" id="levelSlider" oninput="document.getElementById('levelVal').innerText=this.value">
+    </div>
+  </div>
+  <h2 data-t="moodBefore">איך אתם מרגישים כרגע?</h2>
+  <div class="mood" id="moodBefore"></div>
+  <button class="btn" onclick="startModule()" data-t="continue">המשך</button>
+  <button class="btn ghost" style="margin-top:10px" onclick="show('home')" data-t="back">חזרה</button>
+</div>
+
+<!-- MODULE FLOW -->
+<div class="screen" id="s-module">
+  <h1 id="modTitle"></h1>
+  <div class="sub" id="modStep"></div>
+  <div id="modBody"></div>
+  <div class="row" style="margin-top:20px">
+    <button class="btn ghost" onclick="show('home')" data-t="stop">עצור</button>
+    <button class="btn" id="modNext" onclick="nextStep()" data-t="next">הבא</button>
+  </div>
+</div>
+
+<!-- DONE -->
+<div class="screen" id="s-done">
+  <h1 data-t="doneTitle">כל הכבוד</h1>
+  <div class="sub" data-t="doneSub">סיימתם את התרגול</div>
+  <h2 data-t="moodAfter">איך אתם מרגישים עכשיו?</h2>
+  <div class="mood" id="moodAfter"></div>
+  <div class="card">
+    <div data-t="feedbackQ" style="margin-bottom:12px">איך היה התרגול?</div>
+    <div class="fb-row">
+      <button class="btn sec" onclick="feedback(1)" data-t="liked">אהבתי 👍</button>
+      <button class="btn sec" onclick="feedback(-1)" data-t="notForMe">לא בשבילי</button>
+    </div>
+  </div>
+  <button class="btn" onclick="finishSession()" data-t="finish">סיום</button>
+</div>
+
+<!-- RECOMMENDATIONS -->
+<div class="screen" id="s-rec">
+  <h1 data-t="recTitle">המלצות בשבילכם</h1>
+  <div class="sub" data-t="recSub">מבוסס על מה שעזר לכם</div>
+  <div id="recList"></div>
+</div>
+
+<!-- HISTORY -->
+<div class="screen" id="s-hist">
+  <h1 data-t="histTitle">ההיסטוריה שלכם</h1>
+  <div class="card" style="text-align:center">
+    <div class="stat" id="histCount">0</div>
+    <div class="sub" data-t="histMonth" style="margin:0">תרגולים החודש</div>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0" data-t="moodTrend">מגמת מצב רוח</h2>
+    <div id="moodTrend" style="font-size:26px;letter-spacing:4px"></div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="screen" id="s-chat">
+  <h1 data-t="chatTitle">צ'אט עם המאמן</h1>
+  <div class="card">
+    <div class="sub" data-t="chatSoon" style="margin:0">האפשרות לשוחח איתי ישירות תיפתח בקרוב. בינתיים אתם יכולים לתרגל בכל רגע דרך כפתור Ground.</div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="screen" id="s-set">
+  <h1 data-t="setTitle">הגדרות</h1>
+  <div class="card">
+    <h2 style="margin-top:0" data-t="ageGroup">קבוצת גיל</h2>
+    <select class="age" id="ageSel" onchange="saveAge(this.value)"></select>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0" data-t="reminderTime">שעת תזכורת יומית</h2>
+    <input type="time" class="time" id="reminderTime" onchange="saveReminder(this.value)">
+    <div class="sub" id="reminderNote" style="margin:8px 0 0"></div>
+  </div>
+  <div class="card">
+    <div class="set-row">
+      <span data-t="sound">צלילים</span>
+      <label class="toggle"><input type="checkbox" id="soundToggle" checked onchange="saveSound(this.checked)"><span></span></label>
+    </div>
+    <div class="set-row">
+      <span data-t="langLabel">שפה</span>
+      <select class="lang-sel" id="langSel2" onchange="setLang(this.value)"></select>
+    </div>
+  </div>
+</div>
+
+<!-- install prompt -->
+<div class="install" id="installBar">
+  <span data-t="installTxt">התקינו את Ground על הטלפון</span>
+  <div>
+    <button onclick="doInstall()" data-t="installBtn">התקן</button>
+    <button class="x" onclick="document.getElementById('installBar').classList.remove('show')">×</button>
+  </div>
+</div>
+
+<!-- bottom nav -->
+<div class="nav">
+  <button class="active" id="n-home" onclick="show('home')"><span class="ic">🏠</span><span data-t="navHome">בית</span></button>
+  <button id="n-rec" onclick="show('rec')"><span class="ic">💡</span><span data-t="navRec">המלצות</span></button>
+  <button id="n-hist" onclick="show('hist')"><span class="ic">📊</span><span data-t="navHist">היסטוריה</span></button>
+  <button id="n-chat" onclick="show('chat')"><span class="ic">💬</span><span data-t="navChat">צ'אט</span></button>
+  <button id="n-set" onclick="show('set')"><span class="ic">⚙️</span><span data-t="navSet">הגדרות</span></button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
